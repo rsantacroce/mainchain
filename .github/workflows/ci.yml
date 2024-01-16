@@ -45,7 +45,7 @@ jobs:
         run: clang --version
 
       - name: Install Homebrew packages
-        run: brew install berkeley-db@4 automake libtool pkg-config gnu-getopt ccache boost libevent miniupnpc libnatpmp zeromq qt@5 qrencode
+        run: brew install berkeley-db@4 automake libtool pkg-config gnu-getopt ccache boost libevent miniupnpc libnatpmp zeromq qt@5 qrencode protobuf
 
       - name: Set Ccache directory
         run: echo "CCACHE_DIR=${RUNNER_TEMP}/ccache_dir" >> "$GITHUB_ENV"
