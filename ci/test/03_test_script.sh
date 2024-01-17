@@ -138,14 +138,14 @@ bash -c "${BASE_ROOT_DIR}/configure --cache-file=config.cache $BITCOIN_CONFIG_AL
 
 make distdir VERSION="$HOST"
 
-cd "${BASE_BUILD_DIR}/bitcoin-$HOST"
+# cd "${BASE_BUILD_DIR}/bitcoin-$HOST"
 
 bash -c "./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG" || ( (cat config.log) && false)
 
-if [[ "${RUN_TIDY}" == "true" ]]; then
-  MAYBE_BEAR="bear --config src/.bear-tidy-config"
-  MAYBE_TOKEN="--"
-fi
+# if [[ "${RUN_TIDY}" == "true" ]]; then
+#   MAYBE_BEAR="bear --config src/.bear-tidy-config"
+#   MAYBE_TOKEN="--"
+# fi
 
 bash -c "${MAYBE_BEAR} ${MAYBE_TOKEN} make $MAKEJOBS $GOAL" || ( echo "Build failure. Verbose build follows." && make "$GOAL" V=1 ; false )
 
