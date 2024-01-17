@@ -58,8 +58,14 @@ jobs:
           key: ${{ github.job }}-ccache-${{ github.run_id }}
           restore-keys: ${{ github.job }}-ccache-
 
-      - name: CI script
-        run: ./ci/test_run_all.sh
+      - name: autogen 
+        run: ./autogen.sh
+
+      - name: configure 
+        run: ./configure
+
+      - name: make 
+        run: make
 
       - name: Save Ccache cache
         uses: actions/cache/save@v3

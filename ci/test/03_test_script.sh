@@ -37,21 +37,21 @@ export HOST=${HOST:-$("$BASE_ROOT_DIR/depends/config.guess")}
   # CI, so as a temporary minimal fix to work around UB and CI failures, leave
   # bytes_written unmodified.
   # See https://github.com/bitcoin/bitcoin/pull/28359#issuecomment-1698694748
-  echo 'diff --git a/src/leveldb/db/db_impl.cc b/src/leveldb/db/db_impl.cc
-index 65e31724bc..f61b471953 100644
---- a/src/leveldb/db/db_impl.cc
-+++ b/src/leveldb/db/db_impl.cc
-@@ -1028,9 +1028,6 @@ Status DBImpl::DoCompactionWork(CompactionState* compact) {
-       stats.bytes_read += compact->compaction->input(which, i)->file_size;
-     }
-   }
--  for (size_t i = 0; i < compact->outputs.size(); i++) {
--    stats.bytes_written += compact->outputs[i].file_size;
--  }
+#   echo 'diff --git a/src/leveldb/db/db_impl.cc b/src/leveldb/db/db_impl.cc
+# index 65e31724bc..f61b471953 100644
+# --- a/src/leveldb/db/db_impl.cc
+# +++ b/src/leveldb/db/db_impl.cc
+# @@ -1028,9 +1028,6 @@ Status DBImpl::DoCompactionWork(CompactionState* compact) {
+#        stats.bytes_read += compact->compaction->input(which, i)->file_size;
+#      }
+#    }
+# -  for (size_t i = 0; i < compact->outputs.size(); i++) {
+# -    stats.bytes_written += compact->outputs[i].file_size;
+# -  }
 
-   mutex_.Lock();
-   stats_[compact->compaction->level() + 1].Add(stats);' | patch -p1
-  git diff
+#    mutex_.Lock();
+#    stats_[compact->compaction->level() + 1].Add(stats);' | patch -p1
+#   git diff
 )
 
 # TODO reckless disabled for now
