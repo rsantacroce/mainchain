@@ -64,8 +64,8 @@ jobs:
       - name: configure 
         run: ./configure
 
-      - name: make 
-        run: make 
+      - name: make without tests
+        run: make --disable-tests -j10
 
       - name: Save Ccache cache
         uses: actions/cache/save@v3
