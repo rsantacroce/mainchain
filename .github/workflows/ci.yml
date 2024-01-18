@@ -62,10 +62,10 @@ jobs:
         run: ./autogen.sh
 
       - name: configure 
-        run: ./configure
+        run: ./configure --disable-tests
 
       - name: make without tests
-        run: make --disable-tests -j10
+        run: make
 
       - name: Save Ccache cache
         uses: actions/cache/save@v3
